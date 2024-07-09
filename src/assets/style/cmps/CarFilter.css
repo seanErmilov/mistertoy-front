@@ -1,4 +1,18 @@
-.car-filter {
+.toy-filter {
     background-color: var(--clr2bg);
     padding: 1em;
+}
+.selected-label {
+    display: inline-block;
+    margin-right: 5px;
+    padding: 5px;
+    background-color: #f0f0f0;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    font-size: 0.9em;
+}
+
+.selected-labels {
+    margin-top: 5px;
+    margin-bottom: 10px;
 }

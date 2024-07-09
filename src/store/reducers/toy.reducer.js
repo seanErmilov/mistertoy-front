@@ -1,4 +1,4 @@
-import { carService } from "../../services/car.service.js"
+import { toyService } from "../../services/toy.service.js"
 
 //* Toys
 export const SET_TOYS = 'SET_TOYS'
@@ -12,7 +12,7 @@ export const SET_IS_LOADING = 'SET_IS_LOADING'
 
 const initialState = {
     toys: [],
-    isCartShown: false,
+    // isCartShown: false,
     shoppingCart: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
@@ -43,38 +43,41 @@ export function toyReducer(state = initialState, action = {}) {
                 toys: state.toys.map(toy => toy._id === action.toy._id ? action.toy : toy)
             }
 
-        //* Shopping cart
-        case TOGGLE_CART_IS_SHOWN:
-            return { ...state, isCartShown: !state.isCartShown }
-
-        case ADD_TOY_TO_CART:
+        case TOY_UNDO:
             return {
                 ...state,
-                shoppingCart: [...state.shoppingCart, action.toy]
+                toys: [...state.lastToys]
             }
 
-        case REMOVE_TOY_FROM_CART:
-            const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
-            return { ...state, shoppingCart }
 
-        case CLEAR_CART:
-            return { ...state, shoppingCart: [] }
+        //* Shopping cart
+        // case TOGGLE_CART_IS_SHOWN:
+        //     return { ...state, isCartShown: !state.isCartShown }
 
+        // case ADD_TOY_TO_CART:
+        //     return {
+        //         ...state,
+        //         shoppingCart: [...state.shoppingCart, action.toy]
+        //     }
+
+        // case REMOVE_TOY_FROM_CART:
+        //     const shoppingCart = state.shoppingCart.filter(toy => toy._id !== action.toyId)
+        //     return { ...state, shoppingCart }
+
+        // case CLEAR_CART:
+        //     return { ...state, shoppingCart: [] }
+
+        //*filter
         case SET_FILTER_BY:
             return {
                 ...state,
                 filterBy: { ...state.filterBy, ...action.filterBy }
             }
-
+        //loader
         case SET_IS_LOADING:
             return {
                 ...state,
                 isLoading: action.isLoading
-            }
-        case TOY_UNDO:
-            return {
-                ...state,
-                toys: [...state.lastToys]
             }
 
         default:
