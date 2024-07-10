@@ -1,17 +1,9 @@
 import React, { useEffect, useRef, useState } from "react"
 import { utilService } from "../services/util.service.js"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
+import { toyService } from "../services/toy.service.js"
 
-const labels = [
-    'On wheels',
-    'Box game',
-    'Art',
-    'Baby',
-    'Doll',
-    'Puzzle',
-    'Outdoor',
-    'Battery Powered'
-]
+const labels = toyService.getLabels()
 
 export function ToyFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
@@ -56,9 +48,9 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 <input
                     type="text"
                     id="toyName"
-                    name="txt"
+                    name="name"
                     placeholder="By name"
-                    value={filterByToEdit.txt}
+                    value={filterByToEdit.name}
                     onChange={handleChange}
                 />
 

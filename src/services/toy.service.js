@@ -2,7 +2,6 @@ import { storageService } from './async-storage.service.js'
 import { utilService } from './util.service.js'
 import { userService } from './user.service.js'
 
-const STORAGE_KEY = 'toyDB'
 
 export const toyService = {
     query,
@@ -10,8 +9,11 @@ export const toyService = {
     save,
     remove,
     getEmptyToy,
-    getDefaultFilter
+    getDefaultFilter,
+    getLabels,
+
 }
+const STORAGE_KEY = 'toyDB'
 
 function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
@@ -25,10 +27,8 @@ function query(filterBy = {}) {
                 regExp.test(toy.name) &&
                 (!filterBy.inStock || toy.inStock.toString() === filterBy.inStock) &&
                 filterBy.labels.every(label => toy.labels.includes(label))
-
-
             )
-            console.log('filterBy :', filterBy)
+
             if (filterBy.sort) {
                 if (filterBy.sort === 'name') {
                     toys = toys.sort((a, b) => a.name.localeCompare(b.name));
@@ -38,7 +38,6 @@ function query(filterBy = {}) {
                     toys = toys.sort((a, b) => a.createdAt - b.createdAt);
                 }
             }
-
             return toys
         })
 }
@@ -64,10 +63,10 @@ function save(toy) {
 
 function getEmptyToy() {
     return {
-        name: 'Toy-' + (Date.now() % 1000),
+        name: 'Toy' + utilService.getRandomString(),
         price: utilService.getRandomIntInclusive(10, 100),
         createdAt: Date.now(),
-        labels: [],
+        labels: getLabels().filter(() => Math.random() < 0.7),
         inStock: Math.random() < 0.7,
     }
 }
@@ -75,6 +74,21 @@ function getEmptyToy() {
 function getDefaultFilter() {
     return { name: '', inStock: '', labels: [], sort: '' }
 }
+
+function getLabels() {
+    return [
+        'On wheels',
+        'Box game',
+        'Art',
+        'Baby',
+        'Doll',
+        'Puzzle',
+        'Outdoor',
+        'Battery Powered'
+    ]
+}
+
+
 
 
 // TEST DATA

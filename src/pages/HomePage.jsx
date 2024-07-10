@@ -8,8 +8,8 @@ import logo from "../assets/img/logo.png"
 export function HomePage() {
     // TODO: move to storeState
     const dispatch = useDispatch()
-    const [_count, setCount] = useState(10)
-    const count = useSelector(storeState => storeState.count)
+    // const [_count, setCount] = useState(10)
+    // const count = useSelector(storeState => storeState.count)
 
     function changeCount(diff) {
         // setCount(count => count + diff)
@@ -19,7 +19,7 @@ export function HomePage() {
 
     return (
         <section>
-            <h2>
+            {/* <h2>
                 Count {count}
                 <button onClick={() => {
                     changeCount(1)
@@ -27,7 +27,7 @@ export function HomePage() {
                 <button onClick={() => {
                     changeCount(10)
                 }}>+10</button>
-            </h2 >
+            </h2 > */}
             <img src={logo} />
         </section >
     )

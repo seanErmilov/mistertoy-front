@@ -10,13 +10,16 @@ export const TOY_UNDO = 'TOY_UNDO'
 export const SET_FILTER_BY = 'SET_FILTER_BY'
 export const SET_IS_LOADING = 'SET_IS_LOADING'
 
+export const ADD_LABEL = 'ADD_LABEL'
+
 const initialState = {
     toys: [],
     // isCartShown: false,
     shoppingCart: [],
     isLoading: false,
     filterBy: toyService.getDefaultFilter(),
-    lastToys: []
+    lastToys: [],
+    labels: toyService.getLabels()
 }
 
 
@@ -47,6 +50,11 @@ export function toyReducer(state = initialState, action = {}) {
             return {
                 ...state,
                 toys: [...state.lastToys]
+            }
+        case ADD_LABEL:
+            return {
+                ...state,
+                labels: [...state.labels, action.label]
             }
 
 

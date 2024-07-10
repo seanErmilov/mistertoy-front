@@ -6,7 +6,8 @@ export const utilService = {
     saveToStorage,
     animateCSS,
     debounce,
-    timeAgo
+    timeAgo,
+    getRandomString
 }
 
 function makeId(length = 6) {
@@ -97,4 +98,13 @@ function timeAgo(timestamp) {
     } else {
         return years === 1 ? 'a year ago' : `${years} years ago`;
     }
+}
+
+function getRandomString(length = 4) {
+    const chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789"
+    let result = ""
+    for (let i = 0; i < length; i++) {
+        result += chars.charAt(Math.floor(Math.random() * chars.length))
+    }
+    return result
 }
