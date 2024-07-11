@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux"
 
 import { CHANGE_BY } from "../store/reducers/user.reducer"
 
-import logo from "../assets/img/logo.png"
+import logo from "../assets/img/logo.jpg"
 
 export function HomePage() {
     // TODO: move to storeState
@@ -18,7 +18,7 @@ export function HomePage() {
     }
 
     return (
-        <section>
+        <section class='home-page'>
             {/* <h2>
                 Count {count}
                 <button onClick={() => {
@@ -28,7 +28,7 @@ export function HomePage() {
                     changeCount(10)
                 }}>+10</button>
             </h2 > */}
-            <img src={logo} />
+            <img class='home-page-img' src={logo} />
         </section >
     )
 }

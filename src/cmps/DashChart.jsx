@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
     Chart as ChartJS, ArcElement, Tooltip, Legend, CategoryScale,
     LinearScale,
@@ -11,6 +11,9 @@ import { Line } from 'react-chartjs-2';
 import faker from 'faker';
 
 import { toyService } from '../services/toy.service';
+import { useDispatch, useSelector } from 'react-redux';
+import { loadToys } from '../store/actions/toy.actions';
+import { showErrorMsg } from '../services/event-bus.service';
 
 ChartJS.register(ArcElement, CategoryScale,
     LinearScale,
@@ -19,13 +22,38 @@ ChartJS.register(ArcElement, CategoryScale,
     Title, Tooltip, Legend);
 
 export function DashChart() {
+    const toys = useSelector(storeState => storeState.toyModule.toys);
+    const isLoading = useSelector(storeState => storeState.toyModule.isLoading);
+    const [localToys, setLocalToys] = useState([]);
 
-    const data = {
-        labels: toyService.getLabels(),
+
+    useEffect(() => {
+        if (!isLoading && toys.length) {
+            setLocalToys(toys);
+        }
+    }, [isLoading, toys]);
+
+    function getPriceLabel(label, toys) {
+        return toys.reduce((acc, toy) => {
+            if (toy.labels.includes(label)) {
+                acc += toy.price;
+            }
+            return acc;
+        }, 0);
+    }
+
+    function getPricePerLabel(labels, localToys) {
+        return labels.map((label) => getPriceLabel(label, localToys));
+    }
+
+    const labels = toyService.getLabels();
+
+    const dataForPricesPerLabel = {
+        labels,
         datasets: [
             {
                 label: '# of toys',
-                data: [12, 19, 3, 5, 2, 3],
+                data: labels.map(label => getPriceLabel(label, localToys)),
                 backgroundColor: [
                     'rgba(255, 99, 132, 0.2)',
                     'rgba(54, 162, 235, 0.2)',
@@ -45,8 +73,9 @@ export function DashChart() {
                 borderWidth: 1,
             },
         ],
-    }
-    const labels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
+    };
+
+    const lineLabels = ['January', 'February', 'March', 'April', 'May', 'June', 'July'];
     const options = {
         responsive: true,
         plugins: {
@@ -58,27 +87,29 @@ export function DashChart() {
                 text: 'Chart.js Line Chart',
             },
         },
-    }
+    };
     const data2 = {
-        labels,
+        labels: lineLabels,
         datasets: [
             {
                 label: 'Dataset 1',
-                data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+                data: lineLabels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
                 borderColor: 'rgb(255, 99, 132)',
                 backgroundColor: 'rgba(255, 99, 132, 0.5)',
             },
             {
                 label: 'Dataset 2',
-                data: labels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
+                data: lineLabels.map(() => faker.datatype.number({ min: -1000, max: 1000 })),
                 borderColor: 'rgb(53, 162, 235)',
                 backgroundColor: 'rgba(53, 162, 235, 0.5)',
             },
         ],
     };
 
-    return <>
-        <Line options={options} data={data2} />;
-        <Doughnut data={data} />;
-    </>
+    return !isLoading && (
+        <>
+            <Line options={options} data={data2} />;
+            <Doughnut data={dataForPricesPerLabel} />;
+        </>
+    );
 }

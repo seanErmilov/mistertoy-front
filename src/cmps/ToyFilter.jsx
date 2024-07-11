@@ -3,12 +3,12 @@ import { utilService } from "../services/util.service.js"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
 import { toyService } from "../services/toy.service.js"
 
-const labels = toyService.getLabels()
 
 export function ToyFilter({ filterBy, onSetFilter }) {
     const [filterByToEdit, setFilterByToEdit] = useState({ ...filterBy })
     const [selectedLabels, setSelectedLabels] = useState([])
 
+    const labels = toyService.getLabels()
     // Debounce the onSetFilter function using useRef
     const onSetFilterDebounced = useRef(utilService.debounce(onSetFilter, 300))
 
@@ -30,7 +30,6 @@ export function ToyFilter({ filterBy, onSetFilter }) {
             [field]: value,
         }))
     }
-
     // Handle multi-select label filtering
     function handleLabelChange(event) {
         const selectedLabels = Array.from(event.target.selectedOptions, option => option.value)

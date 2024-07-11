@@ -6,7 +6,7 @@ import { ToyFilter } from '../cmps/ToyFilter.jsx'
 import { ToyList } from '../cmps/ToyList.jsx'
 import { toyService } from '../services/toy.service.js'
 import { showSuccessMsg, showErrorMsg } from '../services/event-bus.service.js'
-import { loadToys, removeToy, removeToyOptimistic, saveToy, setFilterBy } from '../store/actions/toy.actions.js'
+import { loadToys, removeToy, removeToyOptimistic, saveToy, setFilterBy, setSortBy } from '../store/actions/toy.actions.js'
 import { ToySort } from '../cmps/ToySort.jsx'
 // import { ADD_TOY_TO_CART } from '../store/reducers/toy.reducer.js'
 
@@ -15,6 +15,7 @@ export function ToyIndex() {
     const dispatch = useDispatch()
     const toys = useSelector(storeState => storeState.toyModule.toys)
     const filterBy = useSelector(storeState => storeState.toyModule.filterBy)
+    const sortBy = useSelector(storeState => storeState.toyModule.sortBy)
     const isLoading = useSelector(storeState => storeState.toyModule.isLoading)
 
     useEffect(() => {
@@ -22,10 +23,14 @@ export function ToyIndex() {
             .catch(err => {
                 showErrorMsg('Cannot load toys!')
             })
-    }, [filterBy])
+    }, [filterBy, sortBy])
 
     function onSetFilter(filterBy) {
         setFilterBy(filterBy)
+    }
+
+    function onSetSort(sortBy) {
+        setSortBy(sortBy)
     }
 
     function onRemoveToy(toyId) {
@@ -75,7 +80,7 @@ export function ToyIndex() {
                 <Link to="/toy/edit">Add Toy</Link>
                 <button className='add-btn' onClick={onAddToy}>Add Random Toy ⛐</button>
                 <ToyFilter filterBy={filterBy} onSetFilter={onSetFilter} />
-                <ToySort filterBy={filterBy} onSetFilter={onSetFilter} />
+                <ToySort sortBy={sortBy} onSetSort={onSetSort} />
                 {!isLoading
                     ? <ToyList
                         toys={toys}
