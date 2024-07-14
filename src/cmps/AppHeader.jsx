@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-// import { UserMsg } from './UserMsg.jsx'
-// import { LoginSignup } from './LoginSignup.jsx'
-// import { userService } from '../services/user.service.js'
-// import { logout } from '../store/actions/user.actions.js'
+import { UserMsg } from './UserMsg.jsx'
+import { LoginSignup } from './LoginSignup.jsx'
+import { userService } from '../services/user.service.js'
+import { logout } from '../store/actions/user.actions.js'
 
 import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 // import { TOGGLE_CART_IS_SHOWN } from '../store/reducers/car.reducer.js'
@@ -12,7 +12,7 @@ import { showErrorMsg, showSuccessMsg } from '../services/event-bus.service.js'
 
 export function AppHeader() {
     const dispatch = useDispatch()
-    // const user = useSelector(storeState => storeState.userModule.loggedInUser)
+    const user = useSelector(storeState => storeState.userModule.loggedInUser)
 
     function onLogout() {
         logout()
@@ -44,7 +44,7 @@ export function AppHeader() {
 
                 </nav>
             </section>
-            {/* {user ? (
+            {user ? (
                 < section >
                     <span to={`/user/${user._id}`}>Hello {user.fullname} <span>${user.score.toLocaleString()}</span></span>
                     <button onClick={onLogout}>Logout</button>
@@ -54,7 +54,7 @@ export function AppHeader() {
                     <LoginSignup />
                 </section>
             )}
-            <UserMsg /> */}
+            <UserMsg />
         </header>
     )
 }

@@ -18,7 +18,7 @@ export function HomePage() {
     }
 
     return (
-        <section class='home-page'>
+        <section className='home-page'>
             {/* <h2>
                 Count {count}
                 <button onClick={() => {
@@ -28,7 +28,7 @@ export function HomePage() {
                     changeCount(10)
                 }}>+10</button>
             </h2 > */}
-            <img class='home-page-img' src={logo} />
+            <img className='home-page-img' src={logo} />
         </section >
     )
 }

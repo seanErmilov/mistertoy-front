@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from "react"
 import { utilService } from "../services/util.service.js"
 import { useEffectUpdate } from "../customHooks/useEffectUpdate.js"
 import { toyService } from "../services/toy.service.js"
+import { ToySort } from "./ToySort.jsx"
 
 
 export function ToyFilter({ filterBy, onSetFilter }) {
@@ -47,7 +48,7 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 <input
                     type="text"
                     id="toyName"
-                    name="name"
+                    name="Toy"
                     placeholder="By name"
                     value={filterByToEdit.name}
                     onChange={handleChange}
