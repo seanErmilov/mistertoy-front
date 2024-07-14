@@ -1,7 +1,8 @@
 .toy-filter {
-    background-color: var(--clr2bg);
+    background-color: ($clr2bg);
     padding: 1em;
 }
+
 .selected-label {
     display: inline-block;
     margin-right: 5px;

@@ -1,28 +1,47 @@
 button {
     cursor: pointer;
-    background-color: var(--clr2bg);
+    background-color: ($clr2bg);
     margin: 0.5em;
     border: 0;
     padding: 0.5em 0.8em;
-    border-radius: 4px;   
+    border-radius: 4px;
 }
 
 button:hover {
-    background-color: var(--clr2);
+    background-color: ($clr2);
     color: white;
     transition: .3s;
 }
+
+.btn {
+    cursor: pointer;
+    background-color: ($clr2bg);
+    margin: 0.5em;
+    border: 0;
+    padding: 0.5em 0.8em;
+    border-radius: 4px;
+}
+
+.btn:hover {
+    background-color: ($clr2);
+    color: white;
+    transition: .3s;
+}
+
 input:focus {
-    background-color: var(--clr1bg);
+    background-color: ($clr1bg);
     transition: background-color 1s;
 }
-select{
+
+select {
     margin: 8px 0;
 }
-label{
-    margin-top:8px;
+
+label {
+    margin-top: 8px;
 }
-input{
+
+input {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0

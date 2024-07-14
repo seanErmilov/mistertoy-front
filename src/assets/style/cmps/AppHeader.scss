@@ -1,6 +1,6 @@
 .app-header {
-    background-color: var(--clr1);
-    color: var(--clr1bg);
+    background-color: ($clr1);
+    color: ($clr1bg);
     padding-block: 1em;
 }
 
@@ -11,6 +11,6 @@
 
 @media(max-width: 720px) {
     .app-header {
-        color: var(--clr2bg);
+        color: ($clr2bg);
     }
 }
