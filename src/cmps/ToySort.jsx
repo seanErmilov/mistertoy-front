@@ -39,7 +39,7 @@ export function ToySort({ sortBy, onSetSort }) {
         <div className="sort-container">
             <select value={sortByToEdit.sort} name="sort" onChange={handleChange} id="sort">
                 <option value="all">Sort By</option>
-                <option value="name">Name</option>
+                <option value="toyName">Name</option>
                 <option value="createdAt">Time</option>
                 <option value="price">Price</option>
             </select>

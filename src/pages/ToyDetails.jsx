@@ -25,7 +25,7 @@ export function ToyDetails() {
     console.log('toy :', toy)
     return (
         <section className="toy-details">
-            <h1>{toy.name}</h1>
+            <h1>{toy.toyName}</h1>
             <h5>Price: ${toy.price}</h5>
             <p>🎁</p>
             {toy.inStock ? <p>available</p> : <p>unavailable</p>}

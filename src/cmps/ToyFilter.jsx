@@ -48,9 +48,9 @@ export function ToyFilter({ filterBy, onSetFilter }) {
                 <input
                     type="text"
                     id="toyName"
-                    name="Toy"
+                    name="toyName"
                     placeholder="By name"
-                    value={filterByToEdit.name}
+                    value={filterByToEdit.toyName}
                     onChange={handleChange}
                 />
 

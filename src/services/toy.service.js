@@ -40,7 +40,7 @@ function save(toy) {
 
 function getEmptyToy() {
     return {
-        name: 'Toy' + utilService.getRandomString(),
+        toyName: 'Toy' + utilService.getRandomString(),
         price: utilService.getRandomIntInclusive(10, 100),
         createdAt: Date.now(),
         labels: getLabels().filter(() => Math.random() < 0.7),
@@ -49,7 +49,7 @@ function getEmptyToy() {
 }
 
 function getDefaultFilter() {
-    return { name: '', inStock: '', labels: [] }
+    return { toyName: '', inStock: '', labels: [] }
 }
 
 function getLabels() {

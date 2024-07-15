@@ -18,20 +18,20 @@ const STORAGE_KEY = 'toyDB'
 function query(filterBy = {}) {
     return storageService.query(STORAGE_KEY)
         .then(toys => {
-            if (!filterBy.name) filterBy.name = ''
+            if (!filterBy.toyName) filterBy.toyName = ''
             if (!filterBy) filterBy.inStock = ''
             if (!filterBy.labels) filterBy.labels = []
-            const regExp = new RegExp(filterBy.name, 'i')
+            const regExp = new RegExp(filterBy.toyName, 'i')
 
             toys = toys.filter(toy =>
-                regExp.test(toy.name) &&
+                regExp.test(toy.toyName) &&
                 (!filterBy.inStock || toy.inStock.toString() === filterBy.inStock) &&
                 filterBy.labels.every(label => toy.labels.includes(label))
             )
 
             if (filterBy.sort) {
-                if (filterBy.sort === 'name') {
-                    toys = toys.sort((a, b) => a.name.localeCompare(b.name));
+                if (filterBy.sort === 'toyName') {
+                    toys = toys.sort((a, b) => a.toyName.localeCompare(b.toyName));
                 } else if (filterBy.sort === 'price') {
                     toys = toys.sort((a, b) => a.price - b.price);
                 } else {
@@ -72,7 +72,7 @@ function getEmptyToy() {
 }
 
 function getDefaultFilter() {
-    return { name: '', inStock: '', labels: [], sort: '' }
+    return { toyName: '', inStock: '', labels: [], sort: '' }
 }
 
 function getLabels() {
